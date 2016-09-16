@@ -57,3 +57,4 @@ fi
 %{_datadir}/%{name}/compat
 
 %changelog
+# REMOVEME: error caused by commit 
