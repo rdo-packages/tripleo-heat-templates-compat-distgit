@@ -1,22 +1,23 @@
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
 
-Name:		openstack-%{upstream_name}-compat
-Summary:	Heat templates for TripleO old version support
-Version:    XXX
-Release:    XXX
-License:	ASL 2.0
-Group:		System Environment/Base
-URL:		https://wiki.openstack.org/wiki/TripleO
-Source0:	http://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{version}.tar.gz
+Name:          openstack-%{upstream_name}-compat
+Summary:       Heat templates for TripleO old version support
+Version:       XXX
+Release:       XXX
+License:       ASL 2.0
+Group:         System Environment/Base
+URL:           https://wiki.openstack.org/wiki/TripleO
+Source0:       https://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{upstream_version}.tar.gz
 
-BuildArch:	noarch
-BuildRequires:	python2-devel
-BuildRequires:	python-setuptools
-BuildRequires:	python-d2to1
-BuildRequires:	python-pbr
+BuildArch:     noarch
+BuildRequires: python2-devel
+BuildRequires: python-setuptools
+BuildRequires: python-d2to1
+BuildRequires: python-pbr
 
-Requires:	PyYAML
-Requires:   openstack-%{upstream_name}
+Requires:      PyYAML
+Requires:      openstack-%{upstream_name}
 
 %description
 OpenStack TripleO Heat Templates is a collection of templates and tools for
