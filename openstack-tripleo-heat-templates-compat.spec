@@ -1,3 +1,4 @@
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
 
 Name:		openstack-%{upstream_name}-compat
@@ -7,7 +8,7 @@ Release:    XXX
 License:	ASL 2.0
 Group:		System Environment/Base
 URL:		https://wiki.openstack.org/wiki/TripleO
-Source0:	http://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{version}.tar.gz
+Source0:	https://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{upstream_version}.tar.gz
 
 BuildArch:	noarch
 BuildRequires:	python2-devel
