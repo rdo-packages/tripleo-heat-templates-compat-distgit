@@ -1,5 +1,6 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
+%define old_version_name mitaka
 
 Name:          openstack-%{upstream_name}-compat
 Summary:       Heat templates for TripleO old version support
@@ -49,10 +50,13 @@ if [ -d %{buildroot}/%{python2_sitelib}/tripleo_heat_merge ]; then
   rm -f %{buildroot}/%{_bindir}/tripleo-heat-merge
 fi
 
+ln -s compat %{buildroot}/%{_datadir}/%{upstream_name}/%{old_version_name}
+
 %files
 %doc README*
 %license LICENSE
 %{python2_sitelib}/tripleo_heat_templates-*.egg-info
 %{_datadir}/%{upstream_name}/compat
+%{_datadir}/%{upstream_name}/%{old_version_name}
 
 %changelog
