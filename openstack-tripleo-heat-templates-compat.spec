@@ -1,5 +1,6 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
+%define old_version_name mitaka
 
 Name:          openstack-%{upstream_name}-compat
 Summary:       Heat templates for TripleO old version support
@@ -31,15 +32,15 @@ building Heat Templates to do deployments of OpenStack.  These templates provide
 
 %install
 %{__python2} setup.py install -O1 --skip-build --root=%{buildroot}
-install -d -m 755 %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar *.yaml %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar puppet %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar docker %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar firstboot %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar extraconfig %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar environments %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar network %{buildroot}/%{_datadir}/${upstream_name}/compat
-cp -ar validation-scripts %{buildroot}/%{_datadir}/${upstream_name}/compat
+install -d -m 755 %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar *.yaml %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar puppet %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar docker %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar firstboot %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar extraconfig %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar environments %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar network %{buildroot}/%{_datadir}/%{upstream_name}/compat
+cp -ar validation-scripts %{buildroot}/%{_datadir}/%{upstream_name}/compat
 if [ -d examples ]; then
   rm -rf examples
 fi
@@ -49,10 +50,13 @@ if [ -d %{buildroot}/%{python2_sitelib}/tripleo_heat_merge ]; then
   rm -f %{buildroot}/%{_bindir}/tripleo-heat-merge
 fi
 
+ln -s compat %{buildroot}/%{_datadir}/%{upstream_name}/%{old_version_name}
+
 %files
 %doc README*
 %license LICENSE
 %{python2_sitelib}/tripleo_heat_templates-*.egg-info
-%{_datadir}/${upstream_name}/compat
+%{_datadir}/%{upstream_name}/compat
+%{_datadir}/%{upstream_name}/%{old_version_name}
 
 %changelog
