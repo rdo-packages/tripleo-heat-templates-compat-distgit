@@ -1,5 +1,5 @@
-# UUID          Group Name
-False 	Non-Interactive Users
-ef25842926f4f843b1dcea1d12273d8152bfb45a       	openstack/tripleo-heat-templates-compat-distgit-core
-c6d032f255f13bb88c863d49e53adc6c40423753        	openstack/tripleo-heat-templates-compat-distgit-ptl
-global:Registered-Users		Registered Users
+# UUID                                  	Group Name
+#
+c6d032f255f13bb88c863d49e53adc6c40423753	openstack/tripleo-heat-templates-compat-distgit-ptl
+ef25842926f4f843b1dcea1d12273d8152bfb45a	openstack/tripleo-heat-templates-compat-distgit-core
+global:Registered-Users                 	Registered Users
