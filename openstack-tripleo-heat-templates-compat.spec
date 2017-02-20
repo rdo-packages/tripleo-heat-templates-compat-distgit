@@ -4,8 +4,8 @@
 
 Name:          openstack-%{upstream_name}-compat
 Summary:       Heat templates for TripleO old version support
-Version:       XXX
-Release:       XXX
+Version:       5.2.0
+Release:       1%{?dist}
 License:       ASL 2.0
 Group:         System Environment/Base
 URL:           https://wiki.openstack.org/wiki/TripleO
@@ -60,3 +60,6 @@ ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_n
 %{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
 %changelog
+* Mon Feb 20 2017 Alfredo Moralejo <amoralej@redhat.com> 5.2.0-1
+- Update to 5.2.0
+
