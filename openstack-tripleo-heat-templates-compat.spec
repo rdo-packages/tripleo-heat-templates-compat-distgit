@@ -1,6 +1,6 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
-%define old_version_name newton
+%define old_version_name ocata
 
 Name:          openstack-%{upstream_name}-compat
 Summary:       Heat templates for TripleO old version support
