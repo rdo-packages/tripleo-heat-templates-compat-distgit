@@ -1,5 +1,9 @@
-# UUID                                  	Group Name
-#
-c6d032f255f13bb88c863d49e53adc6c40423753	openstack/tripleo-heat-templates-compat-distgit-ptl
-ef25842926f4f843b1dcea1d12273d8152bfb45a	openstack/tripleo-heat-templates-compat-distgit-core
-global:Registered-Users                 	Registered Users
+# UUID Group Name
+global:Registered-Users	Registered Users
+4572c517702492251ad622a289176552a8acbbb2	rdo-superusers
+global:Anonymous-Users	Anonymous Users
+a5382d115c7f05a318dd9926ba576d25a5124798	openstack/tripleo-heat-templates-compat-ptl
+05a678d3d4a168e149d5e8a0063bbd1b1c5526da	Administrators
+401cf37bee35d1c809d4d957e55f2a304f8eed69	rdo-provenpackagers
+6ddfecad023c6f4fa3ac8c4d2583c502ea675a73	Non-Interactive Users
+747926924db8a67c4c986b4ef59b2a61a2a130bd	openstack/tripleo-heat-templates-compat-core
