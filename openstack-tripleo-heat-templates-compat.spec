@@ -13,9 +13,9 @@ Source0:       https://tarballs.openstack.org/tripleo-heat-templates/tripleo-hea
 
 BuildArch:     noarch
 BuildRequires: python2-devel
-BuildRequires: python-setuptools
+BuildRequires: python2-setuptools
 BuildRequires: python-d2to1
-BuildRequires: python-pbr
+BuildRequires: python2-pbr
 
 Requires:      PyYAML
 Requires:      openstack-%{upstream_name}
