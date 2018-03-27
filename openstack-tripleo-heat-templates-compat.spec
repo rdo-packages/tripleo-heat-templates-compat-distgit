@@ -35,12 +35,22 @@ building Heat Templates to do deployments of OpenStack.  These templates provide
 install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar common %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar docker %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar firstboot %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar extraconfig %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar environments %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar network %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+if [ -d networks ]; then
+  cp -ar networks %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+fi
 cp -ar validation-scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar deployed-server %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar ci %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar plan-samples %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar roles %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+cp -ar tools %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 if [ -d examples ]; then
   rm -rf examples
 fi
