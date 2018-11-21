@@ -60,3 +60,4 @@ ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_n
 %{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/tripleo-heat-templates/commit/?id=fb4bc626261cc85c3fee1eb99476b3d7fba03e52
