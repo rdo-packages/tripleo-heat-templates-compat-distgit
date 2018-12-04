@@ -32,15 +32,28 @@ building Heat Templates to do deployments of OpenStack.  These templates provide
 
 %install
 %{__python2} setup.py install -O1 --skip-build --root=%{buildroot}
-install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar docker %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar firstboot %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar extraconfig %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar environments %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar network %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar validation-scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+install -d -m 755 %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar *.yaml %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar puppet %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar common %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar docker %{buildroot}/%{_datadir}/%{name}/compat
+if [ -d docker_config_scripts ]; then
+  cp -ar docker_config_scripts %{buildroot}/%{_datadir}/%{name}/compat
+fi
+cp -ar firstboot %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar extraconfig %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar environments %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar network %{buildroot}/%{_datadir}/%{name}/compat
+if [ -d networks ]; then
+  cp -ar networks %{buildroot}/%{_datadir}/%{name}/compat
+fi
+cp -ar validation-scripts %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar deployed-server %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar ci %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar plan-samples %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar roles %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar scripts %{buildroot}/%{_datadir}/%{name}/compat
+cp -ar tools %{buildroot}/%{_datadir}/%{name}/compat
 if [ -d examples ]; then
   rm -rf examples
 fi
