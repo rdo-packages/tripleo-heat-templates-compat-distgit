@@ -1,3 +1,6 @@
+# guard for package OSP does not support
+%global rhosp 0
+
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %define upstream_name tripleo-heat-templates
 %define old_version_name rocky
@@ -17,8 +20,17 @@ BuildRequires: python2-setuptools
 BuildRequires: python-d2to1
 BuildRequires: python2-pbr
 
+Requires:      ansible-pacemaker
+Requires:      ansible-tripleo-ipsec
+Requires:      ansible-role-container-registry
 Requires:      PyYAML
+Requires:      python2-jinja2
+Requires:      python2-six
+Requires:      openstack-tripleo-common >= 7.1.0
 Requires:      openstack-%{upstream_name}
+%if 0%{rhosp} == 1
+Requires:       ansible-role-redhat-subscription
+%endif
 
 %description
 OpenStack TripleO Heat Templates is a collection of templates and tools for
