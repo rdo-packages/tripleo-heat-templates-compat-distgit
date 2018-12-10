@@ -36,6 +36,9 @@ install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar docker %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+if [ -d docker_config_scripts ]; then
+  cp -ar docker_config_scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+fi
 cp -ar firstboot %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar extraconfig %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar environments %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
