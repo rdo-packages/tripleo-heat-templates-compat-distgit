@@ -1,3 +1,14 @@
+# Macros for py2/py3 compatibility
+%if 0%{?fedora} || 0%{?rhel} > 7
+%global pyver %{python3_pkgversion}
+%else
+%global pyver 2
+%endif
+%global pyver_bin python%{pyver}
+%global pyver_sitelib %python%{pyver}_sitelib
+%global pyver_install %py%{pyver}_install
+%global pyver_build %py%{pyver}_build
+# End of macros for py2/py3 compatibility
 # guard for package OSP does not support
 %global rhosp 0
 
@@ -15,21 +26,33 @@ URL:           https://wiki.openstack.org/wiki/TripleO
 Source0:       https://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{upstream_version}.tar.gz
 
 BuildArch:     noarch
-BuildRequires: python2-devel
-BuildRequires: python2-setuptools
+BuildRequires: python%{pyver}-devel
+BuildRequires: python%{pyver}-setuptools
+BuildRequires: python%{pyver}-pbr
+
+# Handle python2 exception
+%if %{pyver} == 2
 BuildRequires: python-d2to1
-BuildRequires: python2-pbr
+%else
+BuildRequires: python%{pyver}-d2to1
+%endif
 
 Requires:      ansible-pacemaker
 Requires:      ansible-tripleo-ipsec
 Requires:      ansible-role-container-registry
-Requires:      PyYAML
-Requires:      python2-jinja2
-Requires:      python2-six
+Requires:      python%{pyver}-jinja2
+Requires:      python%{pyver}-six
 Requires:      openstack-tripleo-common >= 7.1.0
 Requires:      openstack-%{upstream_name}
 %if 0%{rhosp} == 1
 Requires:       ansible-role-redhat-subscription
+%endif
+
+# Handle python2 exception
+%if %{pyver} == 2
+Requires:      PyYAML
+%else
+Requires:      python%{pyver}-PyYAML
 %endif
 
 %description
@@ -40,10 +63,10 @@ building Heat Templates to do deployments of OpenStack.  These templates provide
 %setup -q -n tripleo-heat-templates-%{upstream_version}
 
 %build
-%{__python2} setup.py build
+%{pyver_build}
 
 %install
-%{__python2} setup.py install -O1 --skip-build --root=%{buildroot}
+%{pyver_install}
 install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
@@ -70,8 +93,8 @@ if [ -d examples ]; then
   rm -rf examples
 fi
 
-if [ -d %{buildroot}/%{python2_sitelib}/tripleo_heat_merge ]; then
-  rm -rf %{buildroot}/%{python2_sitelib}/tripleo_heat_merge
+if [ -d %{buildroot}/%{pyver_sitelib}/tripleo_heat_merge ]; then
+  rm -rf %{buildroot}/%{pyver_sitelib}/tripleo_heat_merge
   rm -f %{buildroot}/%{_bindir}/tripleo-heat-merge
 fi
 
@@ -80,7 +103,7 @@ ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_n
 %files
 %doc README*
 %license LICENSE
-%{python2_sitelib}/tripleo_heat_templates-*.egg-info
+%{pyver_sitelib}/tripleo_heat_templates-*.egg-info
 %{_datadir}/openstack-%{upstream_name}/compat
 %{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
