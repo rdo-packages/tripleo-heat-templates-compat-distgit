@@ -35,6 +35,7 @@ BuildRequires: python%{pyver}-pbr
 BuildRequires: python-d2to1
 %else
 BuildRequires: python%{pyver}-d2to1
+BuildRequires: /usr/bin/pathfix.py
 %endif
 
 Requires:      ansible-pacemaker
@@ -99,6 +100,17 @@ if [ -d %{buildroot}/%{pyver_sitelib}/tripleo_heat_merge ]; then
 fi
 
 ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_name}
+
+%if %{pyver} == 3
+# Fix shebangs for Python 3-only distros
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/docker/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/docker_config_scripts/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/tasks/instanceha/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/post_deploy/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/tools/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/network/endpoints/*
+%endif
+
 
 %files
 %doc README*
