@@ -45,6 +45,7 @@ Requires:      python%{pyver}-jinja2
 Requires:      python%{pyver}-six
 Requires:      openstack-tripleo-common >= 7.1.0
 Requires:      openstack-%{upstream_name}
+Requires:      python%{pyver}-paunch
 %if 0%{rhosp} == 1
 Requires:       ansible-role-redhat-subscription
 %endif
