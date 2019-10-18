@@ -31,10 +31,7 @@ BuildRequires: python%{pyver}-setuptools
 BuildRequires: python%{pyver}-pbr
 
 # Handle python2 exception
-%if %{pyver} == 2
-BuildRequires: python-d2to1
-%else
-BuildRequires: python%{pyver}-d2to1
+%if %{pyver} == 3
 BuildRequires: /usr/bin/pathfix.py
 %endif
 
@@ -72,9 +69,8 @@ install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar common %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-cp -ar docker %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
-if [ -d docker_config_scripts ]; then
-  cp -ar docker_config_scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
+if [ -d container_config_scripts ]; then
+  cp -ar container_config_scripts %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 fi
 cp -ar firstboot %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar extraconfig %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
@@ -103,8 +99,7 @@ ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_n
 
 %if %{pyver} == 3
 # Fix shebangs for Python 3-only distros
-pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/docker/*
-pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/docker_config_scripts/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/container_config_scripts/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/tasks/instanceha/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/post_deploy/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/tools/*
