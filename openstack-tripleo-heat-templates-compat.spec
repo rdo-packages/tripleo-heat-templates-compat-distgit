@@ -101,8 +101,10 @@ ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_n
 # Fix shebangs for Python 3-only distros
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/container_config_scripts/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/post_deploy/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/tasks/instanceha/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/tools/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/network/endpoints/*
+pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/common/*
 %endif
 
 
