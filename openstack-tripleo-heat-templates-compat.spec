@@ -1,14 +1,3 @@
-# Macros for py2/py3 compatibility
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global pyver %{python3_pkgversion}
-%else
-%global pyver 2
-%endif
-%global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
-# End of macros for py2/py3 compatibility
 # guard for package OSP does not support
 %global rhosp 0
 
@@ -26,32 +15,25 @@ URL:           https://wiki.openstack.org/wiki/TripleO
 Source0:       https://tarballs.openstack.org/tripleo-heat-templates/tripleo-heat-templates-%{upstream_version}.tar.gz
 
 BuildArch:     noarch
-BuildRequires: python%{pyver}-devel
-BuildRequires: python%{pyver}-setuptools
-BuildRequires: python%{pyver}-pbr
+BuildRequires: python3-devel
+BuildRequires: python3-setuptools
+BuildRequires: python3-pbr
 
-# Handle python2 exception
-%if %{pyver} == 3
 BuildRequires: /usr/bin/pathfix.py
-%endif
 
 Requires:      ansible-pacemaker
 Requires:      ansible-tripleo-ipsec
 Requires:      ansible-role-container-registry
-Requires:      python%{pyver}-jinja2
-Requires:      python%{pyver}-six
+Requires:      python3-jinja2
+Requires:      python3-six
+Requires:      python3-paunch
 Requires:      openstack-tripleo-common >= 7.1.0
 Requires:      openstack-%{upstream_name}
 %if 0%{rhosp} == 1
 Requires:       ansible-role-redhat-subscription
 %endif
 
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:      PyYAML
-%else
-Requires:      python%{pyver}-PyYAML
-%endif
+Requires:      python3-PyYAML
 
 %description
 OpenStack TripleO Heat Templates is a collection of templates and tools for
@@ -61,10 +43,10 @@ building Heat Templates to do deployments of OpenStack.  These templates provide
 %setup -q -n tripleo-heat-templates-%{upstream_version}
 
 %build
-%{pyver_build}
+%{py3_build}
 
 %install
-%{pyver_install}
+%{py3_install}
 install -d -m 755 %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar *.yaml %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
 cp -ar puppet %{buildroot}/%{_datadir}/openstack-%{upstream_name}/compat
@@ -90,14 +72,13 @@ if [ -d examples ]; then
   rm -rf examples
 fi
 
-if [ -d %{buildroot}/%{pyver_sitelib}/tripleo_heat_merge ]; then
-  rm -rf %{buildroot}/%{pyver_sitelib}/tripleo_heat_merge
+if [ -d %{buildroot}/%{python3_sitelib}/tripleo_heat_merge ]; then
+  rm -rf %{buildroot}/%{python3_sitelib}/tripleo_heat_merge
   rm -f %{buildroot}/%{_bindir}/tripleo-heat-merge
 fi
 
 ln -s compat %{buildroot}/%{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
-%if %{pyver} == 3
 # Fix shebangs for Python 3-only distros
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/container_config_scripts/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/extraconfig/post_deploy/*
@@ -105,13 +86,12 @@ pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openst
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/network/endpoints/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/scripts/*
 pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openstack-%{upstream_name}/compat/common/*
-%endif
 
 
 %files
 %doc README*
 %license LICENSE
-%{pyver_sitelib}/tripleo_heat_templates-*.egg-info
+%{python3_sitelib}/tripleo_heat_templates-*.egg-info
 %{_datadir}/openstack-%{upstream_name}/compat
 %{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
