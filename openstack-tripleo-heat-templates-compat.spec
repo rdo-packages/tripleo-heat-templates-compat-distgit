@@ -26,7 +26,6 @@ Requires:      ansible-tripleo-ipsec
 Requires:      ansible-role-container-registry
 Requires:      python3-jinja2
 Requires:      python3-six
-Requires:      python3-paunch
 Requires:      openstack-tripleo-common >= 7.1.0
 Requires:      openstack-%{upstream_name}
 %if 0%{rhosp} == 1
