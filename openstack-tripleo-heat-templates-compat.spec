@@ -116,3 +116,4 @@ pathfix.py -pni "%{__python3} %{py3_shbang_opts}" %{buildroot}%{_datadir}/openst
 %{_datadir}/openstack-%{upstream_name}/%{old_version_name}
 
 %changelog
+# REMOVEME: error caused by commit https://opendev.org/openstack/tripleo-heat-templates/commit/14755a88b00d97da6f63c8817461014b6fd915a3
